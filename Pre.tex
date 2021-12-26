@@ -1,0 +1,339 @@
+% !TeX spellcheck = ru_RU_yo
+%% -*- coding: utf-8 -*-
+\documentclass[12pt,a4paper]{scrartcl} 
+\usepackage[T1,T2A]{fontenc}
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry} 
+\geometry{tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1.5cm}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{setspace}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[breaklinks]{hyperref}
+\usepackage{minted}
+\usepackage{textcomp}
+\usepackage{comment}
+\usepackage{soul}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage[stable]{footmisc}
+\usepackage{tabularx,booktabs} 
+\graphicspath{{images/}}
+\usepackage{svg}
+\svgpath{{images/}}
+
+%Отключает нумерацию страницы
+\pagestyle{empty}
+
+%\titleformat*{\section}{\centering\bfseries}
+%\titleformat*{\subsection}{\Large\bfseries}
+%\titleformat*{\subsubsection}{\large\bfseries}
+%\titleformat*{\paragraph}{\large\bfseries}
+%\titleformat*{\subparagraph}{\large\bfseries}
+
+% Команда для линии с нижним подчёркиванием, возможностью написания сверху текста на ней и текстом под ней.
+\newcommand\superunderline[3]{$\underset{\text{#3}}{\text{\underline{\hspace{0.3cm}#1\hspace{#2}}}}$}
+
+% Тоже самое, но ещё с отступом слева от текста (выравнивание по середине)
+\newcommand\superunderlinec[3]{$\underset{\text{#3}}{\text{\underline{\hspace{#2}#1\hspace{#2}}}}$}
+
+% "Прокаченные" типы колонок для LaTeX. Умеют выравнивать содержимое столбца по горизонтали и принимать фиксированный размер. Полезная вещь.
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % Выравнивание по левому краю.
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % Выравнивание по середине.
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % Выравнивание по правому краю.
+
+% Разработка 1993 года: команды, исправляющие неправильные отступы в шапке и подвале колонок в таблицах LaTeX. 
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % Введи \Tstrut если буквы в таблице налезли на верхнюю полоску
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % И \Bstrut если буквы "съехали" с середины колонки или наезжают на нижнюю полоску
+
+%Настройки для того, чтобы была возможность переносить строки внутри таблиц. Подробнее здесь:  https://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\normalfont}
+\renewcommand\theadgape{\Gape[0pt]}
+\renewcommand\cellgape{\Gape[0pt]}
+
+% Убираем варнинг о том что long table представляет собой слишком большой vbox
+\makeatletter
+\def\LT@start{%
+  \let\LT@start\endgraf
+  \endgraf\penalty\z@\vskip\LTpre
+  \dimen@\pagetotal
+  \advance\dimen@ \ht\ifvoid\LT@firsthead\LT@head\else\LT@firsthead\fi
+  \advance\dimen@ \dp\ifvoid\LT@firsthead\LT@head\else\LT@firsthead\fi
+  \advance\dimen@ \ht\LT@foot
+  \edef\restore@vbadness{\vbadness\the\vbadness\relax}% (added)
+  \vbadness=\@M % (added)
+  \dimen@ii\vfuzz
+  \vfuzz\maxdimen
+    \setbox\tw@\copy\z@
+    \setbox\tw@\vsplit\tw@ to \ht\@arstrutbox
+    \setbox\tw@\vbox{\unvbox\tw@}%
+  \vfuzz\dimen@ii
+  \restore@vbadness % (added)
+  \advance\dimen@ \ht
+        \ifdim\ht\@arstrutbox>\ht\tw@\@arstrutbox\else\tw@\fi
+  \advance\dimen@\dp
+        \ifdim\dp\@arstrutbox>\dp\tw@\@arstrutbox\else\tw@\fi
+  \advance\dimen@ -\pagegoal
+  \ifdim \dimen@>\z@\vfil\break\fi
+      \global\@colroom\@colht
+  \ifvoid\LT@foot\else
+    \advance\vsize-\ht\LT@foot
+    \global\advance\@colroom-\ht\LT@foot
+    \dimen@\pagegoal\advance\dimen@-\ht\LT@foot\pagegoal\dimen@
+    \maxdepth\z@
+  \fi
+  \ifvoid\LT@firsthead\copy\LT@head\else\box\LT@firsthead\fi\nobreak
+  \output{\LT@output}%
+}
+\makeatother
+
+%Используется для построения подчеркивающих линий
+\newlength{\ML}
+
+%\thispagestyle{empty}
+
+\begin{document}
+	
+	\phantom{fake text for spacing}
+	% ТИТУЛЬНАЯ ЧАСТЬ
+	\begin{center}
+		\textbf{Министерство науки и высшего образования Российской Федерации} \\
+		\textbf{ФГАОУ ВО «Волгоградский государственный университет»} \\
+		\textbf{Институт Математики и информационных технологий} \\
+		\textbf{Кафедра компьютерных наук и экспериментальной математики} \\
+		
+		\vspace{0.6cm}
+		
+		\hfill\begin{minipage}{0.4\textwidth}
+		\begin{flushright}
+			\textbf{\textsc{УТВЕРЖДАЮ:}} \\
+			Зав. кафедрой \textit{КНЭМ} \\
+			Клячин В.А.\\
+			«01» сентября 2021 г.
+		\end{flushright}
+		\end{minipage}
+		
+		\vspace{0.6cm}
+		
+		\textbf{
+			ИНДИВИДУАЛЬНОЕ ЗАДАНИЕ на УЧЕБНУЮ ПРАКТИКУ, НАУЧНО-ИССЛЕДОВАТЕЛЬСКАЯ РАБОТА (ПОЛУЧЕНИЕ ПЕРВИЧНЫХ НАВЫКОВ НАУЧНО-ИССЛЕДОВАТЕЛЬСКОЙ РАБОТЫ)
+			на 2021 - 2022 год
+			\vspace{0.2cm}
+		}
+		
+		\vspace{0.3cm}
+		\renewcommand{\arraystretch}{1.5} %!!!
+		
+		\begin{tabular}{R{3cm}cc}
+			Студент & \superunderlinec{\thead{Курбанов Эльдар \\ Ровшанович}}{1.0cm}{(ФИО)} &  \superunderlinec{\thead{МОСм-201}}{1.9cm}{(группа)}
+			\vspace{0.6cm} \\
+			Руководитель практики от ВолГУ & \superunderlinec{\thead{\phantom{fake text for align}\\Клячин В.А.}}{1.1cm}{(ФИО)} & \superunderlinec{\thead{зав. кафедрой КНЭМ,\\проф., д.ф.-м.н.}}{0.7cm}{(должность, ученое звание и степень)} \\
+			Ответственный за организацию практики от кафедры
+ & \superunderlinec{\thead{\phantom{fake text for align}\\Клячин В.А.}}{1.1cm}{(ФИО)} & \superunderlinec{\thead{зав. кафедрой КНЭМ,\\проф., д.ф.-м.н.}}{0.7cm}{(должность, ученое звание и степень)} \\
+			%ragedleft?????? seriously, it works as right align. WTF????
+			\multirow{3}{3cm}{\raggedleft Место прохождения практики} & \multicolumn{2}{c}{\underline{\hspace{0.2cm}Лаборатория <<Математического и программного обеспечения\hspace{1cm}}} \\
+			& \multicolumn{2}{l}{\superunderlinec{\hspace{0.2cm}ЭВМ>> кафедры КНЭМ ИМИТ ФГАОУ ВолГУ\hspace{3.7cm}}{0cm}{(наименование учреждения, структурного подразделения)}} \\
+			Сроки прохождения практики & \multicolumn{2}{c}{с <<01>> сентября 2021 г. по <<30>> декабря 2021 г.}
+		\end{tabular}
+	\end{center}
+	%КОНЕЦ ТИТУЛЬНОЙ ЧАСТИ
+	
+	\vspace{0.2cm}
+	%1 раздел
+	1. Содержание и задания практики:
+		%\newpage
+		\begin{longtable}{| L{0.7cm} | L{1.9cm}| L{3.3cm} | L{1.2cm} | L{2.1cm} | L{3.5cm} |}
+			\hline % Требуется для рисования горизонтальной линии.
+			\centering{№ п/п} &	\centering{Этапы практики} & \centering{Содержание работы и задания этапов} & \Tstrut \centering{Коли-чество часов} & \Tstrut \centering{Календар-ные сроки проведе-ния} & Форма отчетности \\
+			\hline
+			% Используем Bstrut и Tstrut в необходимых местах чтобы чинить вёрстку таблицы. Как можете заметить, выше пришлось вручную переносить слова при помощи "-". К сожалению, Bstrut и Tstrut ломают автоматические переносы цельных слов в LaTeX.
+			1 & \Tstrut Подгото-витель-ный этап \Bstrut & Решение организационных вопросов & 24 & 01.09.2021-03.09.20.21 & Собеседование \\
+			\hline
+			2 & Ориентировочный этап & Постановка задачи, выбор методов решения. & 200 & 04.09.2021-14.10.2021 & \Tstrut Собеседование, письменный отчёт (часть) \Bstrut \\
+			\hline
+			3 & Основной этап & Определение проблемы, объекта и предмета исследования, постановка исследовательской задачи; разработка инструментария исследования, использование интерактивных и проектных технологий; сбор и обработка полученных данных с использованием информационных и компьютерных технологий.  & 400 & 15.10.2021-27.12.2021 & Письменный отчёт (часть). \\
+			\hline
+			4 & Заключи-тельный этап & Подготовка отчета по практике. Представление научно-исследовательской работы. & 24 & 28.12.2021-30.12.2021 & Письменный отчёт (оформление) о результатах НИР; представление НИР \\
+			\hline
+		\end{longtable}
+	
+		2. Планируемые результаты практики:\\
+		\textit{студент должен знать}: основы программирования и языков программирования, организации баз данных, системного программирования и компьютерного моделирования, соблюдения информационной безопасности; фундаментальные принципы прикладного и системного программирования. \\
+		\textit{студент должен уметь}: использовать основы программирования и языков программирования, организации баз данных, системного программирования и компьютерного моделирования, соблюдения информационной безопасности в профессиональной деятельности; использовать знания в области прикладного и системного программирования в профессиональной деятельности. \\
+		\textit{студент должен владеть умениями}: применения основ программирования и языков программирования, организации баз данных, системного программирования и компьютерного моделирования, соблюдения информационной безопасности при решении конкретных задач; разработки ПО.
+		
+		\vspace{0.5cm}
+		\hfill\begin{minipage}{0.7\textwidth}
+			Студент \hspace{0.2cm} \superunderlinec{\phantom{Курбанов Э.Р.}}{0.3cm}{(подпись)} \hspace{1.01cm} \superunderlinec{Курбанов Э.Р.}{0.49cm}{(расшифровка подписи)} \\
+			\vspace{0.2cm}
+		\end{minipage}
+		\hfill\begin{minipage}{\textwidth}
+			Руководитель практики от ВолГУ \hspace{0.2cm} \superunderlinec{\phantom{Курбанов Э.Р.}}{0.3cm}{(подпись)} \hspace{1cm} \superunderlinec{Клячин В.А.}{0.6cm}{(расшифровка подписи)} \\
+		\end{minipage}
+	    \hfill\begin{minipage}{\textwidth}
+	     Ответственный за организацию\\практики от кафедры\hspace{2.7cm} \superunderlinec{\phantom{Курбанов Э.Р.}}{0.3cm}{(подпись)} \hspace{1cm} \superunderlinec{Клячин В.А.}{0.6cm}{(расшифровка подписи)} \\
+	    \end{minipage}
+	
+	\newpage
+	
+	% ТИТУЛЬНАЯ ЧАСТЬ
+	\begin{center}
+		\textbf{Министерство науки и высшего образования Российской Федерации} \\
+		\textbf{ФГАОУ ВО «Волгоградский государственный университет»} \\
+		\textbf{Институт Математики и информационных технологий} \\
+		\textbf{Кафедра компьютерных наук и экспериментальной математики} \\
+		
+		\vspace{0.6cm}
+		
+		\hfill\begin{minipage}{0.4\textwidth}
+		\begin{flushright}
+			\textbf{\textsc{УТВЕРЖДАЮ:}} \\
+			Зав. кафедрой \textit{КНЭМ} \\
+			Клячин В.А.\\
+			«01» сентября 2021 г.
+		\end{flushright}
+		\end{minipage}
+		
+		\vspace{0.6cm}
+		
+		\textbf{
+			ОТЧЕТ\\О ПРОХОЖДЕНИИ УЧЕБНОЙ ПРАКТИКИ, НАУЧНО-ИССЛЕДОВАТЕЛЬСКАЯ РАБОТА (ПОЛУЧЕНИЕ ПЕРВИЧНЫХ НАВЫКОВ НАУЧНО-\\ИССЛЕДОВАТЕЛЬСКОЙ РАБОТЫ)\\на 2021 - 2022 учебный год
+			\vspace{0.2cm}
+		}
+		
+		\vspace{0.3cm}
+		\renewcommand{\arraystretch}{1.5} %!!!
+		
+		\begin{tabular}{R{3cm}cc}
+			Студент & \superunderlinec{\thead{\normalfont{Курбанов Эльдар} \\ \normalfont{Ровшанович}}}{1.0cm}{(ФИО)} &  \superunderlinec{\thead{\normalfont{МОСм-201}}}{1.9cm}{(группа)}
+			\vspace{0.6cm} \\
+			Руководитель практики от ВолГУ & \superunderlinec{\thead{\normalfont{\phantom{fake text for align}}\\\normalfont{Клячин В.А.}}}{1.1cm}{(ФИО)} & \superunderlinec{\thead{\normalfont{зав. кафедрой КНЭМ,}\\\normalfont{проф., д.ф.-м.н.}}}{0.7cm}{(должность, ученое звание и степень)} \\
+			Ответственный за организацию практики от кафедры
+			& \superunderlinec{\thead{\normalfont{\phantom{fake text for align}}\\\normalfont{Клячин В.А.}}}{1.1cm}{(ФИО)} & \superunderlinec{\thead{\normalfont{зав. кафедрой КНЭМ,}\\\normalfont{проф., д.ф.-м.н.}}}{0.7cm}{(должность, ученое звание и степень)} \\
+			%ragedleft?????? seriously, it works as right align. WTF????
+			\multirow{3}{3cm}{\raggedleft Место прохождения практики} & \multicolumn{2}{c}{\underline{\hspace{0.2cm}Лаборатория <<Математического и программного обеспечения\hspace{1cm}}} \\
+			& \multicolumn{2}{l}{\superunderlinec{\hspace{0.2cm}ЭВМ>> кафедры КНЭМ ИМИТ ФГАОУ ВолГУ\hspace{3.7cm}}{0cm}{(наименование учреждения, структурного подразделения)}} \\
+			Сроки прохождения практики & \multicolumn{2}{c}{с <<01>> сентября 2021 г. по <<30>> декабря 2021 г.}
+		\end{tabular}
+	\end{center}
+	%КОНЕЦ ТИТУЛЬНОЙ ЧАСТИ
+	
+	\begin{center}
+		\textbf{1. Ход выполнения практики}
+	\end{center}
+
+\renewcommand\theadalign{bl}
+
+	\begin{longtable}{| C{0.6cm} | C{2cm}| C{2cm} | L{5.5cm} | C{2.58cm} |}
+		\hline % Требуется для рисования горизонтальной линии.
+		№ п/п &	Этап практики & Дата & \centering Описание выполненной работы & \Tstrut Отметки руководителя о выполнении \\
+		\hline
+		% Используем Bstrut и Tstrut в необходимых местах чтобы чинить вёрстку таблицы. Как можете заметить, выше пришлось вручную переносить слова при помощи "-". К сожалению, Bstrut и Tstrut ломают автоматические переносы цельных слов в LaTeX.
+		1 & Подготовительный этап & 01.09.2021-03.09.2021 \Bstrut & Решение организационных вопросов: установочная конференция, знакомство с задачами и программой практики, требованиями к отчетной документации, инструктаж по технике безопасности. & \\
+		\hline
+		2 & Ориентировочный этап & 04.09.2021-14.10.2021 \Bstrut & Постановка задачи, выбор методов решения, сбор и предварительная обработка исходных данных, знакомство с методами работы. & \\
+		\hline
+		\multirow{25}{0.6cm}{\centering 3} & \multirow{25}{2cm}{\centering Основной этап} & 15.10.2021-17.10.2021 \Bstrut & \Tstrut Изучение и обобщение состояния проблемы в теории и современной отечественной и зарубежной практике. & \\
+		\cline{3-5}
+		& & 18.10.2021-20.10.2021 \Bstrut & \Tstrut Постановка исследовательской задачи. Введение. & \\
+		\cline{3-5}
+		& & 21.10.2021-31.10.2021 \Bstrut & \Tstrut Разработка инструментария исследования, использование интерактивных и проектных технологий. & \\
+		\cline{3-5}
+		& & 01.11.2021-15.11.2021 \Bstrut & \Tstrut Сбор и обработка полученных данных с использованием ИКТ. Описание анализа полученных данных. Глава 1. & \\
+		\cline{3-5}
+		& & 16.11.2021-30.11.2021 \Bstrut & \Tstrut Изучение выбранной технологии. Применение выбранной технологии к поставленной задаче. Глава 2. & \\
+		\cline{3-5}
+		& & 01.12.2021-24.12.2021 \Bstrut & \Tstrut Составление заданий для тестирования. Заключение и выводы. & \\
+		\cline{3-5}
+		& & 25.12.2021-27.12.2021 \Bstrut & \Tstrut Оформление научно-исследовательской работы. & \\
+		\hline
+		4 & Заключительный этап & 28.12.2021-30.12.2021 & \Tstrut Подготовка отчета по практике. Представление научно-исследовательской работы. & \\
+		\hline
+		
+	\end{longtable}
+
+\renewcommand\theadalign{bc}
+	
+	\vspace{0.5cm}
+	\hfill\begin{minipage}{0.7\textwidth}
+		Студент \hspace{0.2cm} \superunderlinec{\phantom{Курбанов Э.Р.}}{0.3cm}{(подпись)} \hspace{1cm} \superunderlinec{Курбанов Э.Р.}{0.3cm}{(расшифровка подписи)} \\
+	\end{minipage}
+	
+	\newpage
+	%КОНЕЦ ПЕРВОЙ СЕКЦИИ
+	
+	\begin{center}
+		\textbf{2. Отзывы руководителей проекта}
+	\end{center}
+		\begin{center}
+			\textbf{ОТЗЫВ РУКОВОДИТЕЛЯ ПРАКТИКИ ОТ УНИВЕРСИТЕТА} \\
+			\vspace{0.5cm}
+			\noindent
+			\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+			\vspace{0.3cm}\underline{\hspace{15cm}} \\
+		\end{center}
+		
+		\renewcommand{\arraystretch}{2} %!!!
+		\renewcommand\theadalign{br}
+		
+		\begin{tabular}{R{5cm}cc}
+			Зачёт по практике принят с оценкой & \superunderlinec{}{2.22cm}{(по 5-балльной шкале)} &  \superunderlinec{}{2.22cm}{(по 100-бальной шкале)} \\
+			Ответственный за организацию практики от \phantom{sdfsdfsdfsdsdf} кафедры «\underline{\hspace{0.7cm}}» \underline{\hspace{2.1cm}} 20\underline{\hspace{0.6cm}} г. & \superunderlinec{}{2.22cm}{(подпись)} & \Tstrut\superunderlinec{Клячин В.А.}{1cm}{(расшифровка подписи)} \\
+			Руководитель практики \phantom{sdfsdfsdfsdsdf} от ВолГУ «\underline{\hspace{0.7cm}}» \underline{\hspace{2.1cm}} 20\underline{\hspace{0.6cm}} г. & \superunderlinec{}{2.22cm}{(подпись)} & \Tstrut\superunderlinec{Клячин В.А.}{1cm}{(расшифровка подписи)} \\
+		\end{tabular}
+	
+		\newpage
+	
+	\begin{center}
+		\textbf{Приложения\footnote{Приложения к отчету о прохождении практики: (приводится материалы, указанные в индивидуальном плане на практику в графе «Форма отчетности», например, научно-исследовательская работа, презентации, конспект занятия и т.д.).}}
+	\end{center}
+	
+		\tableofcontents
+		
+		\newpage
+		
+		\section*{Введение}
+			Введение тут
+			
+		\section{Описание предметной области} \label{sec:Description}
+			Программное обеспечение мобильного автономного робота будет работать на базе \textbf{Robot Operating System (ROS)} - гибкого фреймворка\footnote{Программная среда для выполнения чего-либо, своеобразный каркас, используемый для того, чтобы существенно облегчить процесс объединения определённых компонентов программного обеспечения в зависимости от потребностей\cite{bib:FrameworkDefinition}.}, предоставляющего различные инструменты и библиотеки для написания роботизированного программного обеспечения. 
+			
+			\begin{figure}[h]
+				\center{\includegraphics[width=0.4\linewidth]{ros_logo.eps}}
+				\caption{Логотип Robot Operating System}
+				\label{fig:ROSLogo}
+			\end{figure}
+			
+		\section*{Заключение}
+			Заключение тут
+	
+		\newpage
+
+	\begin{thebibliography}{2}
+		\bibitem{bib:ROSDefinition} Lentin Joseph. Mastering ROS for Robotics Programming: Second Edition / Lentin Joseph, Jonathan Cacace. - Birmingham - Mumbai: Packt Publishing Ltd, 2018. - 552 с. - Текст: непосредственный. - с. 7, 20.
+		\bibitem{bib:csiCam} DIYzone Store. 8MP камера для Nvidia Jetson Nano 160 ° 220 ° FOV IMX219 фокусное регулируемое 3280 × 2464 1080p3 0/720p6 0/640 × 480p90 модуль видеокамеры. / AliExpress - URL: \url{https://aliexpress.ru/item/33052983899.html} (дата обращения: 16.03.2020). - Текст: электронный.
+	\end{thebibliography}
+	
+\end{document}
