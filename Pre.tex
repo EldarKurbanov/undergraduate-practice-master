@@ -378,7 +378,9 @@
 			В данной секции будет описаны практические аспекты реализации поведенческой стратегии робота и SLAM в частности.
 			\subsection{Аппаратная составляющая}
 				\subsubsection{Шасси}
-					Шасси робота\footnote{модель TS100 производителя SZdoit} представляет из себя самоходную платформу длинной 275мм, шириной 190мм и высотой 95мм. Она состоит из двух пластиковых гусениц, металлической крышки для установки оборудования, а также двух электромоторов с номинальным напряжением 9 вольт\cite{bib:TS100Desc}.
+					Шасси робота\footnote{модель TS100 производителя SZdoit} представляет из себя самоходную платформу длинной 275мм, шириной 190мм и высотой 95мм. Она состоит из двух пластиковых гусениц, металлической крышки для установки оборудования, а также двух электромоторов, оснащённых энкодерами с номинальным напряжением 9 вольт\cite{bib:TS100Desc}.
+				\subsubsection{Вычислительная составляющая}
+					Для подсчёта импульсов энкодеров\footnote{датчики Холла} на электродвигателях робота и считывания аналогового значения, выдаваемого звуковым эхолокатором используется Arduino-подобный микрокомпьютер Teensy 4.0 на базе 32 битного ARM процессора NXP MIMXRT1062DVL6A\cite{bib:TeensyDesc}. 
 			\subsection{ОС и фреймворк ROS}
 				Для внутренней комм
 			\subsection{Взаимодействие аппаратных частей}
@@ -427,6 +429,7 @@
 		\bibitem{bib:OdometrySLAM} S. A. S. Mohamed, M. Haghbayan, T. Westerlund, J. Heikkonen, H. Tenhunen, and J. Plosila, "A Survey on Odometry for Autonomous Navigation Systems," IEEE Access, vol. 7, pp. 97466-97486, 2019 - URL:\url{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8764393} (дата обращения 30.12.2021). Текст: электронный.
 		\bibitem{bib:ROSDescription} Quigley M. et al. ROS: an open-source Robot Operating System //ICRA workshop on open source software. – Т. 3. – №. 3.2. – С. 5, 2009 - URL: \url{http://robotics.stanford.edu/~ang/papers/icraoss09-ROS.pdf} (дата обращения 30.12.2021). Текст: электронный.
 		\bibitem{bib:TS100Desc} szdoit Store, Описание товара <<Беспроводной металлический радиоуправляемый робот танк шасси амортизирующий автомобильный модуль с системой подвески гусеничная гусеница для Arduino игрушка «сделай сам» / AliExpress - URL: \url{https://aliexpress.ru/item/1005002054452153.html} (дата обращения 30.12.2021). - Текст: электронный.
+		\bibitem{bib:TeensyDesc} PJRC, Teensy® 4.0 Development Board - URL: \url{https://www.pjrc.com/store/teensy40.html} (дата обращения 30.12.2021). Текст: электронный.
 	\end{thebibliography}
 	
 \end{document}
