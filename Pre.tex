@@ -96,10 +96,11 @@
 %Используется для построения подчеркивающих линий
 \newlength{\ML}
 
+\setlength{\parskip}{0.5cm}
+
 %\thispagestyle{empty}
 
 \begin{document}
-	
 	\phantom{fake text for spacing}
 	% ТИТУЛЬНАЯ ЧАСТЬ
 	\begin{center}
@@ -379,11 +380,14 @@
 			\subsection{Аппаратная составляющая}
 				\subsubsection{Шасси}
 					Шасси робота\footnote{модель TS100 производителя SZdoit} представляет из себя самоходную платформу длинной 275мм, шириной 190мм и высотой 95мм. Она состоит из двух пластиковых гусениц, металлической крышки для установки оборудования, а также двух электромоторов, оснащённых энкодерами с номинальным напряжением 9 вольт\cite{bib:TS100Desc}.
-				\subsubsection{Вычислительная составляющая}
+				\subsubsection{Вычислительные мощности}
 					Для подсчёта импульсов энкодеров\footnote{датчики Холла} на электродвигателях робота и считывания аналогового значения, выдаваемого звуковым эхолокатором используется Arduino-подобный микрокомпьютер Teensy 4.0 на базе 32 битного ARM процессора NXP MIMXRT1062DVL6A\cite{bib:TeensyDesc}. 
+					
+					Все остальные расчёты и координацию движения робота принимает на себя одноплатный микрокомпьютер Nvidia Jetson Xavier NX на базе шестиядерного 64-разрядного процессора NVIDIA Carmel с архитектурой ARM v8.2 и 8гб оперативной памяти LPDDR4x\cite{bib:XavierNXDesc}. Такой высокопроизводительный компьютер нацелен не только на управление роботом и обработку данных лазерного сканирования, но и на цели, описанные в разделе ...
 			\subsection{ОС и фреймворк ROS}
-				Для внутренней комм
+				На компьютер Jetson Xavier NX установлен специальный образ операционной системы Ubuntu 18.04 от компании Nvidia, где по-умолчанию в комплект включён пакет разработчика JetPack SDK, в котором собраны полезные инструменты для оптимизации выполнения нейронных сетей на мобильных устройствах. Единственный дистрибутив ROS, подходящий под установленную ОС является ROS Melodic, выпущенный в 2018 году.
 			\subsection{Взаимодействие аппаратных частей}
+			
 			\subsection{Примеры работы}
 			
 		\section{Перспективы разработки} \label{sec:perspective}
@@ -430,6 +434,7 @@
 		\bibitem{bib:ROSDescription} Quigley M. et al. ROS: an open-source Robot Operating System //ICRA workshop on open source software. – Т. 3. – №. 3.2. – С. 5, 2009 - URL: \url{http://robotics.stanford.edu/~ang/papers/icraoss09-ROS.pdf} (дата обращения 30.12.2021). Текст: электронный.
 		\bibitem{bib:TS100Desc} szdoit Store, Описание товара <<Беспроводной металлический радиоуправляемый робот танк шасси амортизирующий автомобильный модуль с системой подвески гусеничная гусеница для Arduino игрушка «сделай сам» / AliExpress - URL: \url{https://aliexpress.ru/item/1005002054452153.html} (дата обращения 30.12.2021). - Текст: электронный.
 		\bibitem{bib:TeensyDesc} PJRC, Teensy® 4.0 Development Board - URL: \url{https://www.pjrc.com/store/teensy40.html} (дата обращения 30.12.2021). Текст: электронный.
+                \bibitem{bib:XavierNXDesc} Nvidia, Технические спецификации Nvidia Jetson Xavier NX. - URL: \url{https://www.nvidia.com/ru-ru/autonomous-machines/embedded-systems/jetson-xavier-nx/} (дата обращения: 30.12.2021). Текст: электронный.
 	\end{thebibliography}
 	
 \end{document}
